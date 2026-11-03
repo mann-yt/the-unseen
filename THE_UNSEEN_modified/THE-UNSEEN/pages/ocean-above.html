@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ocean Above | THE UNSEEN</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #050812;
+            color: #f4f8ff;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        .ocean-world {
+            min-height: 100vh;
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 24px;
+            background:
+                radial-gradient(ellipse at 50% 65%,
+                    rgba(0, 204, 255, 0.13), transparent 48%),
+                linear-gradient(180deg, #070916 0%, #071827 55%, #02050d 100%);
+        }
+
+        .stars {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            opacity: 0.7;
+            background-image:
+                radial-gradient(circle, #ffffff 1px, transparent 1.5px),
+                radial-gradient(circle, #67e8f9 1px, transparent 1.5px);
+            background-size: 83px 83px, 137px 137px;
+            background-position: 0 0, 37px 52px;
+            animation: star-drift 45s linear infinite;
+        }
+
+        .moon {
+            position: absolute;
+            top: 12%;
+            right: 15%;
+            width: clamp(80px, 12vw, 150px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%,
+                #ffffff, #b8f5ff 25%, #5299c5 58%, #183a64 78%);
+            box-shadow:
+                0 0 35px rgba(103, 232, 249, 0.35),
+                0 0 100px rgba(34, 211, 238, 0.16);
+            animation: moon-float 7s ease-in-out infinite;
+        }
+
+        .ocean-ring {
+            position: absolute;
+            width: min(1100px, 125vw);
+            height: 290px;
+            left: 50%;
+            top: 63%;
+            transform: translate(-50%, -50%) rotate(-8deg);
+            border: 1px solid rgba(103, 232, 249, 0.55);
+            border-radius: 50%;
+            box-shadow:
+                0 0 25px rgba(34, 211, 238, 0.16),
+                inset 0 0 35px rgba(34, 211, 238, 0.12);
+            animation: ring-breathe 6s ease-in-out infinite;
+        }
+
+        .ocean-ring::before,
+        .ocean-ring::after {
+            content: "";
+            position: absolute;
+            inset: 18px -25px;
+            border: 1px solid rgba(103, 232, 249, 0.18);
+            border-radius: 50%;
+        }
+
+        .ocean-ring::after {
+            inset: 40px 45px;
+            border-color: rgba(167, 139, 250, 0.25);
+        }
+
+        .world-content {
+            width: min(850px, 100%);
+            text-align: center;
+            z-index: 2;
+            animation: reveal 1.3s ease both;
+        }
+
+        .eyebrow {
+            color: #67e8f9;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: clamp(48px, 9vw, 105px);
+            line-height: 0.98;
+            letter-spacing: -5px;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-shadow: 0 0 40px rgba(103, 232, 249, 0.13);
+        }
+
+        h1 span {
+            display: block;
+            color: transparent;
+            background: linear-gradient(90deg, #67e8f9, #d8fbff, #a78bfa);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .description {
+            max-width: 540px;
+            margin: 30px auto 0;
+            color: #a6b8d0;
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        .mystery {
+            margin: 42px auto 0;
+            max-width: 540px;
+            padding: 22px;
+            border: 1px solid rgba(103, 232, 249, 0.2);
+            background: rgba(7, 20, 35, 0.55);
+            backdrop-filter: blur(12px);
+            color: #d9faff;
+            font-size: 14px;
+            line-height: 1.8;
+            box-shadow: 0 0 40px rgba(34, 211, 238, 0.05);
+        }
+
+        .mystery span {
+            display: block;
+            margin-bottom: 8px;
+            color: #67e8f9;
+            font-size: 10px;
+            letter-spacing: 3px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 35px;
+        }
+
+        .world-button {
+            display: inline-block;
+            padding: 15px 22px;
+            border: 1px solid #67e8f9;
+            color: #dffbff;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            transition: 0.3s ease;
+        }
+
+        .world-button:hover {
+            color: #050812;
+            background: #67e8f9;
+            box-shadow: 0 0 28px rgba(103, 232, 249, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .world-button.secondary {
+            border-color: rgba(167, 139, 250, 0.65);
+            color: #c4b5fd;
+        }
+
+        .world-button.secondary:hover {
+            background: #a78bfa;
+            color: #080611;
+            box-shadow: 0 0 28px rgba(167, 139, 250, 0.3);
+        }
+
+        .coordinates {
+            position: absolute;
+            left: 28px;
+            bottom: 25px;
+            color: #61758f;
+            font-size: 9px;
+            letter-spacing: 2px;
+        }
+
+        .world-index {
+            position: absolute;
+            right: 28px;
+            bottom: 25px;
+            color: #67e8f9;
+            font-size: 10px;
+            letter-spacing: 3px;
+        }
+
+        @keyframes reveal {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes moon-float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-18px);
+            }
+        }
+
+        @keyframes ring-breathe {
+            0%, 100% {
+                opacity: 0.55;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes star-drift {
+            from {
+                background-position: 0 0, 37px 52px;
+            }
+            to {
+                background-position: 0 500px, 37px 300px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .ocean-world {
+                padding: 100px 20px 80px;
+            }
+
+            .moon {
+                top: 7%;
+                right: 8%;
+                opacity: 0.75;
+            }
+
+            .ocean-ring {
+                top: 60%;
+                height: 190px;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+
+            .description {
+                font-size: 14px;
+            }
+
+            .coordinates {
+                left: 15px;
+                bottom: 15px;
+            }
+
+            .world-index {
+                right: 15px;
+                bottom: 15px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+            }
+        }/* FIX: Keep the ocean rings behind the content */
+.ocean-ring {
+    top: 78%;
+    width: min(900px, 110vw);
+    height: 220px;
+    opacity: 0.45;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.world-content {
+    position: relative;
+    z-index: 2;
+}
+
+.mystery {
+    position: relative;
+    z-index: 3;
+}
+
+.actions {
+    position: relative;
+    z-index: 3;
+}
+
+/* Give the content more breathing room */
+.description {
+    margin-top: 24px;
+}
+
+.mystery {
+    margin-top: 32px;
+}
+
+.actions {
+    margin-top: 28px;
+}
+
+@media (max-width: 600px) {
+    .ocean-ring {
+        top: 78%;
+        height: 160px;
+    }
+}
+    </style>
+</head>
+
+<body>
+    <main class="ocean-world">
+        <div class="stars" aria-hidden="true"></div>
+        <div class="moon" aria-hidden="true"></div>
+        <div class="ocean-ring" aria-hidden="true"></div>
+
+        <section class="world-content">
+            <p class="eyebrow">Memory 001 · The Impossible</p>
+
+            <h1>
+                The Ocean
+                <span>Above</span>
+            </h1>
+
+            <p class="description">
+                Somewhere beyond the edge of sleep, an ocean floats
+                above the clouds. Its waves remember every dream
+                that the waking world forgot.
+            </p>
+
+            <div class="mystery">
+                <span>ARCHIVE FRAGMENT 001</span>
+                What if the sky isn't empty? What if it is an ocean,
+                and we have spent our entire lives looking down?
+            </div>
+
+            <div class="actions">
+                <a class="world-button" href="dream-archive.html">
+                    ← RETURN TO THE ARCHIVE
+                </a>
+
+
+          <a class="world-button secondary" href="time-paradox.html">
+        SEEK THE NEXT MEMORY ↗
+        </a>
+
+            </div>
+        </section>
+
+        <p class="coordinates">LOCATION: BEYOND THE DREAMLINE</p>
+        <p class="world-index">WORLD 01 / 03</p>
+    </main>
+</body>
+</html>

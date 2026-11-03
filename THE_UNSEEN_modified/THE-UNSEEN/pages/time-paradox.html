@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Time Paradox — THE UNSEEN</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .time-hero {
+      min-height: 78vh;
+      padding: 100px 8%;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 50px;
+      overflow: hidden;
+    }
+
+    .time-label {
+      color: #62eaff;
+      letter-spacing: 4px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .time-title {
+      font-size: clamp(48px, 7vw, 100px);
+      line-height: 0.98;
+      letter-spacing: -4px;
+      margin: 28px 0;
+    }
+
+    .time-title span {
+      background: linear-gradient(100deg, #a777ff, #62eaff);
+      color: transparent;
+      background-clip: text;
+    }
+
+    .time-copy {
+      color: #a5a2b7;
+      line-height: 1.9;
+      max-width: 480px;
+    }
+
+    .time-portal {
+      width: min(340px, 75vw);
+      aspect-ratio: 1;
+      border: 1px solid #9367ff;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      position: relative;
+      margin: auto;
+      background: radial-gradient(circle, #55307855, #11101d 68%);
+      box-shadow: 0 0 80px #8b5cff22, inset 0 0 55px #8b5cff22;
+      animation: portal-float 5s ease-in-out infinite;
+    }
+
+    .time-portal::before,
+    .time-portal::after {
+      content: "";
+      position: absolute;
+      inset: 12%;
+      border: 1px solid #54e8ff99;
+      border-radius: 50%;
+      animation: portal-spin 12s linear infinite;
+    }
+
+    .time-portal::after {
+      inset: 25%;
+      border-color: #c4a0ff;
+      animation-direction: reverse;
+      animation-duration: 8s;
+    }
+
+    .portal-core {
+      width: 23%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, white, #9c6cff 35%, #302057 75%);
+      box-shadow: 0 0 45px #a16bff;
+      transition: transform 0.5s, box-shadow 0.5s;
+    }
+
+    .time-portal:hover .portal-core {
+      transform: scale(1.5);
+      box-shadow: 0 0 90px #62eaff;
+    }
+
+    @keyframes portal-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes portal-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-16px); }
+    }
+
+    .timeline-section {
+      padding: 80px 8% 120px;
+    }
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 42px;
+    }
+
+    .timeline-card {
+      padding: 30px;
+      min-height: 220px;
+      border: 1px solid #ffffff20;
+      background: linear-gradient(145deg, #171321, #0b0a12);
+      transition: transform 0.35s, border-color 0.35s, background 0.35s;
+    }
+
+    .timeline-card:hover {
+      transform: translateY(-10px);
+      border-color: #62eaff;
+      background: linear-gradient(145deg, #211a36, #0b0a12);
+    }
+
+    .timeline-number {
+      color: #62eaff;
+      font-size: 11px;
+      letter-spacing: 3px;
+    }
+
+    .timeline-card h3 {
+      font-size: 25px;
+      margin-top: 32px;
+    }
+
+    .timeline-card p {
+      color: #a5a2b7;
+      line-height: 1.8;
+    }
+
+    .time-ending {
+      padding: 100px 8%;
+      text-align: center;
+      background: radial-gradient(ellipse at center, #39205355, transparent 65%);
+    }
+
+    .time-ending h2 {
+      font-size: clamp(36px, 6vw, 72px);
+      margin: 20px auto;
+      max-width: 850px;
+    }
+
+    .time-back {
+      display: inline-block;
+      padding: 17px 25px;
+      border: 1px solid #a777ff;
+      color: #f4f0ff;
+      text-decoration: none;
+      margin-top: 25px;
+      letter-spacing: 1px;
+      font-size: 12px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .time-back:hover {
+      background: #a777ff;
+      color: #090810;
+    }
+
+    @media (max-width: 760px) {
+      .time-hero {
+        grid-template-columns: 1fr;
+        padding: 75px 7%;
+      }
+
+      .time-title {
+        letter-spacing: -2px;
+      }
+
+      .timeline-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-section {
+        padding: 60px 7%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .time-portal,
+      .time-portal::before,
+      .time-portal::after {
+        animation: none;
+      }
+
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <header class="site-header">
+    <a href="../index.html" class="logo">THE <span>UNSEEN</span></a>
+    <nav>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#discover">Discover</a>
+      <a href="../index.html#about">About</a>
+    </nav>
+    <a href="../index.html" class="nav-cta">← RETURN HOME</a>
+  </header>
+
+  <main>
+    <section class="time-hero">
+      <div>
+        <p class="time-label">WORLD 02 / THE FOURTH DIMENSION</p>
+        <h1 class="time-title">
+          WHAT IF<br>
+          TIME COULD<br>
+          <span>REMEMBER?</span>
+        </h1>
+        <p class="time-copy">
+          Yesterday has not disappeared. Tomorrow may already exist.
+          Somewhere between the two lies a moment that was never meant
+          to happen.
+        </p>
+        <a href="#timeline" class="time-back">ENTER THE TIMELINE ↓</a>
+      </div>
+
+      <div class="time-portal" aria-label="An animated time portal">
+        <div class="portal-core"></div>
+      </div>
+    </section>
+
+    <section class="timeline-section" id="timeline">
+      <p class="time-label">THREE POSSIBLE REALITIES</p>
+      <h2>WHEN WOULD YOU GO?</h2>
+
+
+<div class="timeline-grid">
+
+  <article class="timeline-card">
+    <span class="timeline-number">01 / ORIGIN</span>
+    <h3>The Past</h3>
+    <p>Meet the moment that made you who you are. Would you change anything?</p>
+    <a href="#past-experience" class="timeline-link">
+      REVISIT YOUR ORIGINS ↗
+    </a>
+  </article>
+
+  <article class="timeline-card">
+    <span class="timeline-number">02 / NOW</span>
+    <h3>The Present</h3>
+    <p>A single second. A thousand possibilities. Everything changes here.</p>
+    <a href="#present-experience" class="timeline-link">
+      ENTER THE MOMENT ↗
+    </a>
+  </article>
+
+  <article class="timeline-card">
+    <span class="timeline-number">03 / INFINITY</span>
+    <h3>The Future</h3>
+    <p>Discover a world that may exist only because you imagined it.</p>
+    <a href="#future-experience" class="timeline-link">
+      GLIMPSE TOMORROW ↗
+    </a>
+  </article>
+
+</div>
+
+<section class="timeline-experiences" id="past-experience">
+  <span class="time-label">01 / A LETTER TO YOUR PAST</span>
+  <h2>If you could meet your past self...</h2>
+  <p>Would you change your choices, or thank them for bringing you here?</p>
+  <a href="#timeline" class="time-back">RETURN TO THE TIMELINE ↑</a>
+</section>
+
+<section class="timeline-experiences" id="present-experience">
+  <span class="time-label">02 / THIS VERY SECOND</span>
+  <h2>This moment will never happen again.</h2>
+  <p>One second. One decision. A thousand paths waiting to unfold.</p>
+  <a href="#timeline" class="time-back">RETURN TO THE TIMELINE ↑</a>
+</section>
+
+<section class="timeline-experiences" id="future-experience">
+  <span class="time-label">03 / A MESSAGE FROM TOMORROW</span>
+  <h2>Your future is still unwritten.</h2>
+  <p>Somewhere ahead, a version of you is living with the choices you make today.</p>
+  <a href="#timeline" class="time-back">RETURN TO THE TIMELINE ↑</a>
+</section>
+
+
+    <section class="time-ending">
+      <p class="time-label">A MESSAGE FROM TOMORROW</p>
+      <h2>What if the future is waiting for you to remember it?</h2>
+      <p class="time-copy" style="margin: 0 auto;">
+        Every second is a doorway. Every choice changes the universe.
+      </p>
+      <a href="../index.html#discover" class="time-back">
+        RETURN TO THE UNKNOWN ↗
+      </a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a href="../index.html" class="logo">THE <span>UNSEEN</span></a>
+    <p>TIME IS AN ILLUSION.</p>
+    <a href="#top">BACK TO THE BEGINNING ↑</a>
+  </footer>
+</body>
+</html>
